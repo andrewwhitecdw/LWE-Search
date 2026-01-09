@@ -1,0 +1,30 @@
+--- a/native/src/seal/util/numth.cpp
++++ b/native/src/seal/util/numth.cpp
+@@ -385,6 +385,15 @@ namespace seal
+ 
+         bool try_minimal_primitive_root(uint64_t degree, const Modulus &modulus, uint64_t &destination)
+         {
++            uint64_t p = modulus.value();
++            bool special = (p == 0x7FFFFFE060001ULL);  // 2251799780524033
++
++            uint64_t old_degree = degree;
++            if(special)
++            {
++                degree = 1 << 17;  // Use 2^17 for special primes
++            }
++
+             uint64_t root;
+             if (!try_primitive_root(degree, modulus, root))
+             {
+@@ -407,6 +416,11 @@ namespace seal
+                 current_generator = multiply_uint_mod(current_generator, generator_sq, modulus);
+             }
+ 
++            if(special)
++            {
++                root = exponentiate_uint_mod(root, degree / old_degree, modulus);
++            }
++
+             destination = root;
+             return true;
+         }
