@@ -188,8 +188,9 @@ template <typename index_t, typename plain_word> struct Database {
     std::sort(high_scores.begin(), high_scores.end(), cmp);
     std::vector<std::pair<index_t, index_t>> indices(k);
     for (size_t i = 0; i < k; i++) {
-      indices[i] = std::make_pair(std::get<1>(high_scores[i]),
-                                  std::get<2>(high_scores[i]));
+      indices[i] = std::make_pair(
+          std::get<1>(high_scores[high_scores.size() - 1 - i]),
+          std::get<2>(high_scores[high_scores.size() - 1 - i]));
     }
     return indices;
   }
