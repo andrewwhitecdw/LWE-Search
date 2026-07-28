@@ -577,8 +577,9 @@ template <typename index_t, typename plain_word> struct Database {
       // Copy cluster centroids to processed_centroids_
       for (index_t j = 0; j < ms.num_clusters_; j++) {
         auto &cl = ms.cluster_data_[j];
-        index_t eff_dim_first_idx = eff_ms_idx + j / dim_mid;
-        index_t eff_dim_mid_idx = j % dim_mid;
+        auto [eff_cl_idx, _] = to_eff_cluster_idx(j, i);
+        index_t eff_dim_first_idx = eff_ms_idx + eff_cl_idx / dim_mid;
+        index_t eff_dim_mid_idx = eff_cl_idx % dim_mid;
         std::copy(cl.centroid_, cl.centroid_ + vector_len_,
                   processed_centroids_.begin() +
                       (eff_dim_first_idx + eff_dim_mid_idx * eff_dim_first) *
