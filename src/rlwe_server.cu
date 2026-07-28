@@ -230,7 +230,9 @@ void RLWEContext_t<uword>::sub(CtLD<uword> &ctxt_res, CtLD<uword> &ctxt_in1,
     sub_inplace(ctxt_res, ctxt_in2);
     return;
   } else if (&ctxt_res == &ctxt_in2) {
-    sub_inplace(ctxt_res, ctxt_in1);
+    neg_inplace(ctxt_res);
+    add_inplace(ctxt_res, ctxt_in1);
+    return;
   }
   assert_compatible_ctld(ctxt_in1, ctxt_in2);
 
