@@ -38,7 +38,7 @@ inline double calculate_recall(std::vector<index_t> &gt,
   for (int query_id = 0; query_id < num_vectors; query_id++) {
     // Build hash set of ground truth neighbors for O(1) lookup
     std::unordered_set<index_t> gt_set;
-    for (uint32_t gt_idx = 0; gt_idx < recall_k; gt_idx++) {
+    for (uint32_t gt_idx = 0; gt_idx < gt_k; gt_idx++) {
       gt_set.insert(gt[query_id * gt_k + gt_idx]);
     }
 
