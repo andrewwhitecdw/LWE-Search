@@ -243,7 +243,7 @@ template <typename index_t, typename plain_word> struct Database {
   }
 
   void parse_num_clusters_per_mesocluster(const std::string &filename) {
-    std::ifstream file(filename);
+    std::ifstream file(filename, std::ios::binary);
     if (!file.is_open()) {
       throw std::runtime_error("Failed to open file: " + filename);
     }
@@ -285,7 +285,7 @@ template <typename index_t, typename plain_word> struct Database {
   }
 
   void parse_mesocluster_centroids(const std::string &filename) {
-    std::ifstream file(filename);
+    std::ifstream file(filename, std::ios::binary);
     if (!file.is_open()) {
       throw std::runtime_error("Failed to open file: " + filename);
     }
@@ -314,7 +314,7 @@ template <typename index_t, typename plain_word> struct Database {
   }
 
   void parse_index(const std::string &filename) {
-    std::ifstream file(filename);
+    std::ifstream file(filename, std::ios::binary);
     if (!file.is_open()) {
       throw std::runtime_error("Failed to open file: " + filename);
     }
