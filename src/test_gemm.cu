@@ -230,7 +230,7 @@ __global__ void gemm_(word *res, const word *lhs, const plain_word *rhs,
     for (unsigned int i = 0; i < k_iters; i++) {
       for (unsigned int j = 0; j < thread_n; j++) {
         *(reinterpret_cast<int32_t *>(temp_rhs) + j) =
-            smem_rhs_4B[i + (threadIdx.x * thread_m + j) * rhs_smem_width_4B];
+            smem_rhs_4B[i + (threadIdx.x * thread_n + j) * rhs_smem_width_4B];
       }
       for (unsigned int j = 0; j < thread_m; j++) {
         constexpr unsigned int word_ratio = sizeof(word) / sizeof(plain_word);
