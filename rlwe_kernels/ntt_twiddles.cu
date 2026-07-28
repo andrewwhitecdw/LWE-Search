@@ -134,7 +134,13 @@ static uint64_t find_minimal_primitive_root(size_t degree, uint64_t modulus) {
 
 void init_twiddle_factors(uint64_t modulus, size_t poly_degree, int device_id) {
     if (initialized && modulus == current_modulus) {
-        return;  // Already initialized
+        // Already initialized for this device?
+        if (device_twd_2048.count(device_id) &&
+            device_twd_inv_2048.count(device_id) &&
+            device_psi_powers_2048.count(device_id) &&
+            device_psi_inv_powers_2048.count(device_id)) {
+            return;
+        }
     }
    
     if (initialized && modulus != current_modulus) {
