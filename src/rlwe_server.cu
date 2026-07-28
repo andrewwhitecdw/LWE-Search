@@ -159,6 +159,7 @@ void RLWEContext_t<uword>::add(CtLD<uword> &ctxt_res, CtLD<uword> &ctxt_in1,
     return;
   } else if (&ctxt_res == &ctxt_in2) {
     add_inplace(ctxt_res, ctxt_in1);
+    return;
   }
   assert_compatible_ctld(ctxt_in1, ctxt_in2);
 
