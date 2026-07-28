@@ -35,7 +35,12 @@ void print_ld(Ctx_t &ctx, logical_data_t<cudastf::slice<T>> ld, ::std::string na
 
            // Cap the number of elements if necessary
            size_t cnt = buf.size();
-           if (max_entries > 0 && max_entries < cnt) cnt = max_entries;
+           if (offset >= cnt) {
+               cnt = 0;
+           } else {
+               cnt -= offset;
+               if (max_entries > 0 && max_entries < cnt) cnt = max_entries;
+           }
 
            for (size_t i = offset; i < offset + cnt; i++)
            {
