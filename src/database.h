@@ -237,7 +237,7 @@ template <typename index_t, typename plain_word> struct Database {
     std::sort(scores.begin(), scores.end(), cmp);
     std::vector<index_t> indices(k);
     for (size_t i = 0; i < k; i++) {
-      indices[i] = scores[i].second;
+      indices[i] = scores[scores.size() - 1 - i].second;
     }
     return indices;
   }
